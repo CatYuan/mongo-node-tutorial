@@ -1,3 +1,5 @@
+# mongo-node-tutorial
+
 Tutorial for mongoDB and Node.js - using the native driver
 
 - [Connect to MongoDB](#connect-to-mongodb)
@@ -44,4 +46,3 @@ Tutorial for mongoDB and Node.js - using the native driver
   - an empty object indicates to find all documents stored in the db
 
 ## Update a document
-# mongo-node-tutorial
