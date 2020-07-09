@@ -22,8 +22,10 @@ client.connect((err) => {
 
   const db = client.db(dbName);
 
-  findDocuments(db, () => {
-    client.close();
+  removeDocuments(db, function () {
+    findDocuments(db, function () {
+      client.close();
+    });
   });
 });
 
@@ -45,5 +47,23 @@ const findDocuments = function (db, callback) {
     console.log("found the following records");
     console.log(docs);
     callback(docs);
+  });
+};
+
+const updateDocument = function (db, callback) {
+  const collection = db.collection("documents");
+  collection.updateOne({ a: 10 }, { $unset: { b: 0 } }, function (err, result) {
+    assert.equal(err, null);
+    console.log("Updated the document with the field equal to 2");
+    callback(result);
+  });
+};
+
+const removeDocuments = function (db, callback) {
+  const collection = db.collection("documents");
+  collection.deleteMany({}, function (err, result) {
+    assert.equal(err, null);
+    console.log("Deleted all documents");
+    callback(result);
   });
 };
